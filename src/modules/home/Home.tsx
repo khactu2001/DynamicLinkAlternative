@@ -1,13 +1,18 @@
 // In index.js of a new project
 import React from 'react';
 import {View, Text, Button, StyleSheet} from 'react-native';
-import {RootStackParamList} from '../../navigation/types';
+import {ScreensProps} from '~navigation/types';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation, route}: ScreensProps<'HomeScreen'>) => {
   return (
     <View style={styles.root}>
       <Text>Home Screen</Text>
-      <Button onPress={() => {}} title="Go to Settings" />
+      <Button
+        onPress={() => {
+          navigation.navigate('SettingsScreen');
+        }}
+        title="Go to Settings"
+      />
     </View>
   );
 };

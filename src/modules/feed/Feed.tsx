@@ -2,12 +2,17 @@ import React from 'react';
 import {View, Text, Button, StyleSheet} from 'react-native';
 import {ScreensProps} from '~navigation/types';
 
-const FeedScreen = ({navigation, route}: ScreensProps<'Feed'>) => {
+const FeedScreen = ({navigation, route}: ScreensProps<'FeedScreen'>) => {
   const {userId} = route.params;
   return (
     <View style={styles.root}>
       <Text>Feed Screen with user id: {userId ?? 'ID'}</Text>
-      <Button onPress={() => {}} title="Go to Settings" />
+      <Button
+        onPress={() => {
+          navigation.navigate('HomeScreen');
+        }}
+        title="Go to Home Screen"
+      />
     </View>
   );
 };

@@ -1,9 +1,9 @@
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 export type RootStackParamList = {
-  Home: undefined;
-  Settings: undefined;
-  Feed: {
+  HomeScreen: undefined;
+  SettingsScreen: undefined;
+  FeedScreen: {
     userId: string;
   };
 };
