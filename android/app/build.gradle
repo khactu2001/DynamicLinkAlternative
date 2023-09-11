@@ -75,7 +75,7 @@ android {
 
     namespace "com.dynamiclinkalternative"
     defaultConfig {
-        applicationId "com.dynamiclinkalternative"
+        applicationId "com.android.dynamiclinkalternative"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
