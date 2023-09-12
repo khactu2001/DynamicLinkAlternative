@@ -5,11 +5,31 @@ import FeedScreen from '~modules/feed/Feed';
 import SettingsScreen from '~modules/settings/Settings';
 import {RootStackParamList} from '~navigation/types';
 import HomeScreen from '~modules/home/Home';
+import {Linking, Text} from 'react-native';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function App() {
+  const config = {
+    screens: {
+      FeedScreen: 'feed/:userId',
+      SettingsScreen: 'setting',
+    },
+  };
+  const linking = {
+    prefixes: [
+      'dynamiclinkalternative://',
+      'https://android-dla.onelink.me/toL9/omigpmkk',
+    ],
+    config,
+  };
+  Linking.getInitialURL().then(url => {
+    console.log('url', url);
+  });
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      linking={linking}
+      fallback={<Text>Loading...</Text>}
+      onStateChange={state => console.log('New state is', state?.routes)}>
       <Stack.Navigator
         screenOptions={{
           // headerShown: false,
@@ -18,8 +38,7 @@ export default function App() {
             backgroundColor: '#6200EE',
           },
           headerTintColor: '#fff',
-        }}
-        initialRouteName="HomeScreen">
+        }}>
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="FeedScreen" component={FeedScreen} />
         <Stack.Screen name="SettingsScreen" component={SettingsScreen} />

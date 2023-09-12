@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
+    "android:clean": "cd android/ && ./gradlew clean && cd ..",
     "pod": "cd ios/ && pod install && cd ..",
     "ios": "react-native run-ios --simulator=iPhone 14",
     "lint": "eslint .",
-    "start": "react-native start --port 8082",
+    "start": "react-native start",
     "test": "jest",
     "postinstall": "patch-package",
     "build:ios": "react-native bundle --entry-file='index.js' --bundle-output='./ios/main.jsbundle' --dev=false --platform='ios'"
