@@ -8,6 +8,15 @@ const codePushOptions = {checkFrequency: codePush.CheckFrequency.MANUAL};
 
 const HomeScreen = ({navigation, route}: ScreensProps<'HomeScreen'>) => {
   const onButtonPress = () => {
+    codePush.getCurrentPackage().then(update => {
+      // If the current app "session" represents the first time
+      // this update has run, and it had a description provided
+      // with it upon release, let's show it to the end user
+      // if (update.isFirstRun && update.description) {
+      // Display a "what's new?" modal
+      console.log('getCurrentPackage: ', update);
+      // }
+    });
     codePush.sync({
       updateDialog: true,
       // updateDialog: {
