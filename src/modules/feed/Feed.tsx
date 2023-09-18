@@ -3,7 +3,7 @@ import {View, Text, Button, StyleSheet} from 'react-native';
 import {ScreensProps} from '~navigation/types';
 
 const FeedScreen = ({navigation, route}: ScreensProps<'FeedScreen'>) => {
-  const {userId} = route.params;
+  const {userId} = route.params || {userId: 1};
   return (
     <View style={styles.root}>
       <Text>Feed Screen with user id: {userId ?? 'ID'}</Text>

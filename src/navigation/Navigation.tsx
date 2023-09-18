@@ -37,7 +37,9 @@ export default function NavigationTree() {
     <NavigationContainer
       linking={linking}
       fallback={<Text>Loading...</Text>}
-      onStateChange={state => console.log('New state is', state?.routes)}>
+
+      // onStateChange={state => console.log('New state is', state?.routes)}
+    >
       {/* <NativeStack.Navigator
         screenOptions={{
           // headerShown: false,
@@ -55,6 +57,7 @@ export default function NavigationTree() {
       {/* bottom tab */}
       <BottomTab.Navigator tabBar={props => <CustomBottomBar {...props} />}>
         <BottomTab.Screen name="HomeScreen" component={HomeScreen} />
+        <BottomTab.Screen name="FeedScreen" component={FeedScreen} />
         <BottomTab.Screen name="SettingsScreen" component={SettingsScreen} />
       </BottomTab.Navigator>
     </NavigationContainer>
