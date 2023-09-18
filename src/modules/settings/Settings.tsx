@@ -1,17 +1,14 @@
 import {Button, StyleSheet, Text, View} from 'react-native';
 import {ScreensProps} from '~navigation/types';
 
-const SettingsScreen = ({
-  navigation,
-  route,
-}: ScreensProps<'SettingsScreen'>) => {
+const SettingsScreen = () => {
   return (
     <View style={styles.root}>
       <Text>Settings Screen</Text>
       <Button
-        onPress={() => {
-          navigation.navigate('FeedScreen', {userId: 'Lee'});
-        }}
+        // onPress={() => {
+        //   navigation.navigate('FeedScreen', {userId: 'Lee'});
+        // }}
         title="Go to Feed Screen"
       />
     </View>
