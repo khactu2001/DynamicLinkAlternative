@@ -1,5 +1,5 @@
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
-import {useRef} from 'react';
+import {useEffect, useRef} from 'react';
 import {
   View,
   Text,
@@ -21,7 +21,9 @@ const WIDTH_BOTTOM_TAB =
   Dimensions.get('window').width / bottom_bar_icons.length;
 const HEIGHT_CURLY = HEIGHT_NOTCH / 2;
 
-const COLOR_BOTTOM_BAR = '#FFF';
+// const COLOR_BOTTOM_BAR = '#FFF';
+const COLOR_BOTTOM_BAR = '#4DB6AC';
+const COLOR_FLOAT_BUTTON = '#76FF03';
 function CustomBottomBar({state, descriptors, navigation}: BottomTabBarProps) {
   const insets = useSafeAreaInsets();
   return (
@@ -47,28 +49,37 @@ function CustomBottomBar({state, descriptors, navigation}: BottomTabBarProps) {
         console.log('isFocused', isFocused);
         const translateYValue = useRef(new Animated.Value(0)).current;
         const translateY = (index: number) => {
-          // Will change fadeAnim value to 1 in 5 seconds
-
           console.log(
             `'translateYValue.current[index]' ${index}`,
             translateYValue,
           );
           Animated.timing(translateYValue, {
             toValue: -HEIGHT_NOTCH / 2,
-            duration: 2000,
+            duration: 500,
             useNativeDriver: true,
           }).start();
         };
         const translateYBack = (index: number) => {
-          // Will change fadeAnim value to 1 in 5 seconds
           Animated.timing(translateYValue, {
             toValue: 0,
-            duration: 2000,
+            duration: 1000,
             useNativeDriver: true,
           }).start();
         };
 
         isFocused && translateY(state.index);
+
+        useEffect(() => {
+          return () => {
+            console.log('removed index', state.index);
+            console.log('current focus', isFocused);
+            if (isFocused) {
+              translateYBack(state.index);
+            } else {
+              translateY(state.index);
+            }
+          };
+        }, [isFocused]);
 
         const onPress = () => {
           const event = navigation.emit({
@@ -78,7 +89,7 @@ function CustomBottomBar({state, descriptors, navigation}: BottomTabBarProps) {
           });
 
           if (!isFocused && !event.defaultPrevented) {
-            translateYBack(state.index);
+            // translateYBack(state.index);
             // The `merge: true` option makes sure that the params inside the tab screen are preserved
             navigation.navigate({name: route.name, merge: true});
           }
@@ -203,16 +214,16 @@ const styles = StyleSheet.create({
 
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: COLOR_BOTTOM_BAR,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
+    backgroundColor: COLOR_FLOAT_BUTTON,
+    // shadowColor: '#000',
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 1,
+    // },
+    // shadowOpacity: 0.2,
+    // shadowRadius: 1.41,
 
-    elevation: 2,
+    // elevation: 2,
   },
 });
 export default CustomBottomBar;

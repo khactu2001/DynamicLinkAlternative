@@ -8,7 +8,7 @@ import HomeScreen from '~modules/home/Home';
 import {Linking, Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '~modules/home/Home';
-import CustomBottomBar from '~sharedComponent/bottom-bar/CustomBottomBar';
+import CustomBottomBar from '~sharedComponents/bottom-bar/CustomBottomBar';
 
 const BottomTab = createBottomTabNavigator();
 
