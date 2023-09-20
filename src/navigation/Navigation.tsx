@@ -8,7 +8,7 @@ import HomeScreen from '~modules/home/Home';
 import {Linking, Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '~modules/home/Home';
-import CustomBottomBar from '~sharedComponent/bottom-bar/CustomBottomBar';
+import CustomBottomBar from '~sharedComponents/bottom-bar/CustomBottomBar';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -29,15 +29,17 @@ export default function NavigationTree() {
     config,
   };
 
-  Linking.getInitialURL().then(url => {
-    console.log('url', url);
-  });
+  // Linking.getInitialURL().then(url => {
+  //   console.log('url', url);
+  // });
 
   return (
     <NavigationContainer
       linking={linking}
       fallback={<Text>Loading...</Text>}
-      onStateChange={state => console.log('New state is', state?.routes)}>
+
+      // onStateChange={state => console.log('New state is', state?.routes)}
+    >
       {/* <NativeStack.Navigator
         screenOptions={{
           // headerShown: false,
@@ -55,6 +57,7 @@ export default function NavigationTree() {
       {/* bottom tab */}
       <BottomTab.Navigator tabBar={props => <CustomBottomBar {...props} />}>
         <BottomTab.Screen name="HomeScreen" component={HomeScreen} />
+        <BottomTab.Screen name="FeedScreen" component={FeedScreen} />
         <BottomTab.Screen name="SettingsScreen" component={SettingsScreen} />
       </BottomTab.Navigator>
     </NavigationContainer>

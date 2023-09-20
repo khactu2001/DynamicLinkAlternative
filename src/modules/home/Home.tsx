@@ -1,5 +1,5 @@
 // In index.js of a new project
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, Button, StyleSheet, TouchableOpacity} from 'react-native';
 import {ScreensProps} from '~navigation/types';
 import codePush from 'react-native-code-push';
@@ -36,13 +36,7 @@ const HomeScreen = ({navigation, route}: ScreensProps<'HomeScreen'>) => {
         title="Go to Settings"
       />
 
-      <Button
-        onPress={onButtonPress}
-        // style={{
-        //   marginTop: 32,
-        // }}
-        title="Check for updates"
-      />
+      <Button onPress={onButtonPress} title="Check for updates" />
     </View>
   );
 };
@@ -53,6 +47,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'whitesmoke',
+    backgroundColor: 'lightgray',
   },
 });
