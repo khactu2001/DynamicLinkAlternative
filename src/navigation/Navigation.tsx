@@ -29,9 +29,9 @@ export default function NavigationTree() {
     config,
   };
 
-  Linking.getInitialURL().then(url => {
-    console.log('url', url);
-  });
+  // Linking.getInitialURL().then(url => {
+  //   console.log('url', url);
+  // });
 
   return (
     <NavigationContainer

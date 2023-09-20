@@ -46,13 +46,13 @@ function CustomBottomBar({state, descriptors, navigation}: BottomTabBarProps) {
             ? options.title
             : route.name;
         const isFocused = state.index === index;
-        console.log('isFocused', isFocused);
+        // console.log('isFocused', isFocused);
         const translateYValue = useRef(new Animated.Value(0)).current;
         const translateY = (index: number) => {
-          console.log(
-            `'translateYValue.current[index]' ${index}`,
-            translateYValue,
-          );
+          // console.log(
+          //   `'translateYValue.current[index]' ${index}`,
+          //   translateYValue,
+          // );
           Animated.timing(translateYValue, {
             toValue: -HEIGHT_NOTCH / 2,
             duration: 500,
@@ -71,8 +71,8 @@ function CustomBottomBar({state, descriptors, navigation}: BottomTabBarProps) {
 
         useEffect(() => {
           return () => {
-            console.log('removed index', state.index);
-            console.log('current focus', isFocused);
+            // console.log('removed index', state.index);
+            // console.log('current focus', isFocused);
             if (isFocused) {
               translateYBack(state.index);
             } else {

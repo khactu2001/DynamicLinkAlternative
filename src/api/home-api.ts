@@ -9,16 +9,18 @@ const api = new API();
 
 type TImagesParams = 'page' | 'per_page' | 'order_by';
 type TGetImagesParams = {
-  [Key in TImagesParams]: string;
+  [Key in TImagesParams]: string | number;
 };
 
 export default class HomeService {
-  getImages = async (props: TGetImagesParams) => {
-    const results = await api.get(
-      HOME_PATHNAME.GET_IMAGES_URL,
-      undefined,
-      props,
-    );
+  getImages = async (
+    props: TGetImagesParams = {
+      page: 1,
+      per_page: 10,
+      order_by: 'latest',
+    },
+  ) => {
+    const results = await api.get(HOME_PATHNAME.GET_IMAGES_URL, props);
 
     return results;
   };
