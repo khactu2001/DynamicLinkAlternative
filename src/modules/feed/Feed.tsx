@@ -1,57 +1,56 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, FlatList, Dimensions} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  Dimensions,
+  ActivityIndicator,
+} from 'react-native';
 import FastImage from 'react-native-fast-image';
+import {useFetchImages} from '~api/feed-api';
 import HomeService from '~api/home-api';
+import {RenderItemType} from '~models/common-model';
 import {ListImages, TImage} from '~models/image-model';
 import {ScreensProps} from '~navigation/types';
 
 const homeService = new HomeService();
 
 const {width, height} = Dimensions.get('screen');
-export type renderItemType<T> = {
-  item: T;
-  index: number;
-};
+const NUM_COLUMNS = 3;
+const MARGIN = 8;
+const WIDTH_IMAGE = (width - (NUM_COLUMNS + 1) * MARGIN) / 3;
 const FeedScreen = ({navigation, route}: ScreensProps<'FeedScreen'>) => {
-  // const {userId} = route.params || {userId: 1};
+  const {isLoading, isError, data, isFetching, fetchNextPage, hasNextPage} =
+    useFetchImages();
+  const flattenImages = data?.pages.flatMap(page => page.result);
 
-  const [images, setImages] = useState<ListImages>();
-
-  const getImagesApi = async () => {
-    const result = await homeService.getImages();
-    console.log(result);
-    setImages(result);
+  const getMoreImages = () => {
+    console.log('==getMoreImages==', hasNextPage);
+    !isFetching && hasNextPage && fetchNextPage();
   };
-  useEffect(() => {
-    getImagesApi();
-  }, []);
 
-  const renderImage = ({item, index}: renderItemType<TImage>) => {
+  const renderImage = ({item}: RenderItemType<TImage>) => {
     const {urls} = item;
-    return (
-      // <View key={index} style={styles.imageContainer}>
-      <FastImage source={{uri: urls.thumb}} style={styles.image} />
-      // </View>
-    );
+    return <FastImage source={{uri: urls.thumb}} style={styles.image} />;
   };
-
-  // return null;
 
   return (
     <View style={styles.root}>
       <FlatList
-        data={images}
+        data={flattenImages}
         keyExtractor={item => `${item.id}`}
         renderItem={renderImage}
-        // horizontal
+        numColumns={NUM_COLUMNS}
         contentContainerStyle={{
-          flexWrap: 'wrap',
-          flexDirection: 'row',
+          rowGap: MARGIN,
+          paddingVertical: MARGIN,
         }}
-
-        // style={{
-        //   flexWrap: 'wrap',
-        // }}
+        style={{flex: 1}}
+        onEndReached={getMoreImages}
+        onEndReachedThreshold={0.2}
+        ListFooterComponent={
+          hasNextPage ? <ActivityIndicator size={'small'} /> : null
+        }
       />
     </View>
   );
@@ -61,19 +60,18 @@ export default FeedScreen;
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    // alignItems: 'center',
-    // justifyContent: 'center',
     backgroundColor: 'whitesmoke',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    // flexDirection: 'row',
+    // flexWrap: 'wrap',
   },
   imageContainer: {
     width: width / 3,
     // height: width / 3,
   },
   image: {
-    width: width / 3,
-    height: width / 3,
+    width: WIDTH_IMAGE,
+    height: WIDTH_IMAGE,
     backgroundColor: 'red',
+    marginLeft: MARGIN,
   },
 });
