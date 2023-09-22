@@ -19,13 +19,17 @@ type TGetImagesParams = {
 const getImages = async (
   props: TGetImagesParams = {
     page: 1,
-    per_page: 10,
+    per_page: 20,
     order_by: 'latest',
     pageParam: 1,
   },
 ) => {
   props.page = props.pageParam;
   const results = await api.get(HOME_PATHNAME.GET_IMAGES_URL, props);
+  console.log(
+    results?.map(item => item.id),
+    props.pageParam,
+  );
   return {
     result: results,
     nextPageParam: props.pageParam + 1,
@@ -41,8 +45,9 @@ export const useFetchImages = (props?: TGetImagesParams) => {
         pageParam,
       }),
     getNextPageParam: (lastPage, allPages) => {
-      if (lastPage.nextPageParam > 10) return undefined;
+      if (lastPage.nextPageParam > 40) return undefined;
       return lastPage.nextPageParam;
     },
+    keepPreviousData: true,
   });
 };
