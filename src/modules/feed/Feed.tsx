@@ -15,6 +15,7 @@ import {useFetchImages} from '~api/feed-api';
 import {RenderItemType} from '~models/common-model';
 import {TImage} from '~models/image-model';
 import {ScreensProps} from '~navigation/types';
+import ListItemImage from './components/ListItemImage';
 
 const SCREEN_DIMENSION = Dimensions.get('screen');
 const SCREEN_RATIO = SCREEN_DIMENSION.width / SCREEN_DIMENSION.height;
@@ -38,7 +39,7 @@ const FeedScreen = ({navigation, route}: ScreensProps<'FeedScreen'>) => {
   // const flattenImages = useMemo(() => {
   //   return data?.pages.flatMap(page => page.result);
   // }, [data]);
-  const flattenImages = data?.pages.flatMap(page => page.result);
+  const flattenImages = data?.pages?.flatMap(page => page.result);
 
   const getMoreImages = () => {
     hasNextPage && fetchNextPage();
@@ -55,39 +56,44 @@ const FeedScreen = ({navigation, route}: ScreensProps<'FeedScreen'>) => {
             index,
           });
         }}>
-        <FastImage source={{uri: urls.thumb}} style={styles.image} />
+        <ListItemImage
+          imageProps={{
+            source: {uri: urls.thumb},
+            style: styles.image,
+          }}
+          containerStyle={styles.imageContainer}
+        />
       </Pressable>
     );
   };
   const renderFullScreenImage = ({item}: RenderItemType<TImage>) => {
     const {urls, width, height} = item;
     const IMG_RATIO = width / height;
-    const uri = urls.raw;
+    const uri = urls.regular;
     /**
      * wImg ----- hImg
      * screenW ----- screenH
      */
     // img ratio is larger than screen ratio -> use static width
-    if (IMG_RATIO > SCREEN_RATIO) {
-      return (
-        <FastImage
-          source={{uri}}
-          style={{
+    const customStyle =
+      IMG_RATIO > SCREEN_RATIO
+        ? {
             width: SCREEN_DIMENSION.width,
             height: SCREEN_DIMENSION.width / IMG_RATIO,
-            backgroundColor: 'gray',
-          }}
-        />
-      );
-    }
+          }
+        : {
+            height: SCREEN_DIMENSION.height,
+            width: SCREEN_DIMENSION.height * IMG_RATIO,
+          };
     return (
       <FastImage
         source={{uri}}
-        style={{
-          height: SCREEN_DIMENSION.height,
-          width: SCREEN_DIMENSION.height * IMG_RATIO,
-          backgroundColor: 'gray',
-        }}
+        style={[
+          {
+            backgroundColor: 'gray',
+          },
+          customStyle,
+        ]}
       />
     );
   };
@@ -103,10 +109,7 @@ const FeedScreen = ({navigation, route}: ScreensProps<'FeedScreen'>) => {
           paddingVertical: MARGIN,
         }}
         style={{flex: 1}}
-        onEndReached={() => {
-          console.log('==renderImage==', hasNextPage);
-          getMoreImages();
-        }}
+        onEndReached={getMoreImages}
         onEndReachedThreshold={0.5}
         ListFooterComponent={
           hasNextPage ? <ActivityIndicator size={'small'} /> : null
@@ -176,15 +179,16 @@ const styles = StyleSheet.create({
     // flexWrap: 'wrap',
   },
   imageContainer: {
-    width: SCREEN_DIMENSION.width / 3,
-    // height: width / 3,
+    width: WIDTH_IMAGE,
+    height: WIDTH_IMAGE,
+    marginLeft: MARGIN,
+    borderRadius: 8,
+    backgroundColor: '#E0E0E0',
+    overflow: 'hidden',
   },
   image: {
     width: WIDTH_IMAGE,
     height: WIDTH_IMAGE,
-    backgroundColor: 'lightgray',
-    marginLeft: MARGIN,
-    borderRadius: 8,
   },
   imageFull: {
     // width: WIDTH_IMAGE,
