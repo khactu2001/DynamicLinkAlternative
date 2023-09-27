@@ -27,6 +27,7 @@ const getImages = async (
   props.page = props.pageParam;
   const results = await api.get(HOME_PATHNAME.GET_IMAGES_URL, props);
   console.log(
+    '---call api---',
     results?.map(item => item.id),
     props.pageParam,
   );

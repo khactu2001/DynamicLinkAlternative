@@ -89,9 +89,9 @@ const FeedScreen = ({navigation, route}: ScreensProps<'FeedScreen'>) => {
       <FastImage
         source={{uri}}
         style={[
-          {
-            backgroundColor: 'gray',
-          },
+          // {
+          //   backgroundColor: 'gray',
+          // },
           customStyle,
         ]}
       />
