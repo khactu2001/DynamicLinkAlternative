@@ -10,6 +10,8 @@ import {
 } from 'react-native';
 import {icons} from '~assets/icons';
 import SwitchComponent from '~sharedComponents/SwitchComponent';
+import codePush from 'react-native-code-push';
+const codePushOptions = {checkFrequency: codePush.CheckFrequency.MANUAL};
 
 type SectionOption = {
   label: string;
@@ -28,19 +30,19 @@ const SettingsScreen = () => {
       label: 'Option 1',
       options: [
         {
-          label: 'Option 1.1',
+          label: 'Theme',
           type: 'switch',
           value: 'Option 1',
           onPress: () => {},
         },
         {
-          label: 'Option 1.2',
+          label: 'Version',
           type: 'text',
           value: 'Option 2',
           onPress: () => {},
         },
         {
-          label: 'Option 1.3',
+          label: 'Check for updates',
           type: 'icon',
           value: icons.ic_next,
           onPress: () => {},
@@ -85,6 +87,25 @@ const SettingsScreen = () => {
     );
   };
 
+  const onButtonPress = () => {
+    codePush.getCurrentPackage().then(update => {
+      // If the current app "session" represents the first time
+      // this update has run, and it had a description provided
+      // with it upon release, let's show it to the end user
+      // if (update.isFirstRun && update.description) {
+      // Display a "what's new?" modal
+      console.log('getCurrentPackage: ', update);
+      // }
+    });
+    codePush.sync({
+      updateDialog: true,
+      // updateDialog: {
+      //   title: 'Updated',
+      // },
+      installMode: codePush.InstallMode.IMMEDIATE,
+    });
+  };
+
   return (
     <View style={styles.root}>
       <ScrollView>
@@ -127,4 +148,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SettingsScreen;
+export default codePush(codePushOptions)(SettingsScreen);

@@ -85,17 +85,7 @@ const FeedScreen = ({navigation, route}: ScreensProps<'FeedScreen'>) => {
             height: SCREEN_DIMENSION.height,
             width: SCREEN_DIMENSION.height * IMG_RATIO,
           };
-    return (
-      <FastImage
-        source={{uri}}
-        style={[
-          // {
-          //   backgroundColor: 'gray',
-          // },
-          customStyle,
-        ]}
-      />
-    );
+    return <FastImage source={{uri}} style={[customStyle]} />;
   };
   return (
     <View style={styles.root}>
@@ -130,12 +120,10 @@ const FeedScreen = ({navigation, route}: ScreensProps<'FeedScreen'>) => {
             horizontal
             getItemLayout={(_, index) => ({
               length: SCREEN_DIMENSION.width,
-              // offset: flattenImages?.length! * SCREEN_DIMENSION.width,
               offset: index * SCREEN_DIMENSION.width,
               index,
             })}
             pagingEnabled
-            // style={{backgroundColor: ''}}
             contentContainerStyle={{
               justifyContent: 'center',
               alignItems: 'center',
@@ -175,8 +163,6 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     backgroundColor: 'whitesmoke',
-    // flexDirection: 'row',
-    // flexWrap: 'wrap',
   },
   imageContainer: {
     width: WIDTH_IMAGE,
@@ -191,8 +177,6 @@ const styles = StyleSheet.create({
     height: WIDTH_IMAGE,
   },
   imageFull: {
-    // width: WIDTH_IMAGE,
-    // height: WIDTH_IMAGE,
     backgroundColor: 'lightgray',
   },
 });

@@ -2,31 +2,8 @@
 import React, {useEffect} from 'react';
 import {View, Text, Button, StyleSheet, TouchableOpacity} from 'react-native';
 import {ScreensProps} from '~navigation/types';
-import codePush from 'react-native-code-push';
-import useConnectedStatus from '~utils/network';
-
-const codePushOptions = {checkFrequency: codePush.CheckFrequency.MANUAL};
 
 const HomeScreen = ({navigation, route}: ScreensProps<'HomeScreen'>) => {
-  const onButtonPress = () => {
-    codePush.getCurrentPackage().then(update => {
-      // If the current app "session" represents the first time
-      // this update has run, and it had a description provided
-      // with it upon release, let's show it to the end user
-      // if (update.isFirstRun && update.description) {
-      // Display a "what's new?" modal
-      console.log('getCurrentPackage: ', update);
-      // }
-    });
-    codePush.sync({
-      updateDialog: true,
-      // updateDialog: {
-      //   title: 'Updated',
-      // },
-      installMode: codePush.InstallMode.IMMEDIATE,
-    });
-  };
-
   const myObj = {
     age: 22,
   };
@@ -44,12 +21,10 @@ const HomeScreen = ({navigation, route}: ScreensProps<'HomeScreen'>) => {
         }}
         title="Go to Settings"
       />
-
-      <Button onPress={onButtonPress} title="Check for updates" />
     </View>
   );
 };
-export default codePush(codePushOptions)(HomeScreen);
+export default HomeScreen;
 
 const styles = StyleSheet.create({
   root: {
