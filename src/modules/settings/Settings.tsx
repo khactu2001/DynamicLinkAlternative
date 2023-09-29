@@ -25,32 +25,6 @@ type SectionProps = {
 };
 
 const SettingsScreen = () => {
-  const sections: SectionProps[] = [
-    {
-      label: 'Option 1',
-      options: [
-        {
-          label: 'Theme',
-          type: 'switch',
-          value: 'Option 1',
-          onPress: () => {},
-        },
-        {
-          label: 'Version',
-          type: 'text',
-          value: 'Option 2',
-          onPress: () => {},
-        },
-        {
-          label: 'Check for updates',
-          type: 'icon',
-          value: icons.ic_next,
-          onPress: () => {},
-        },
-      ],
-    },
-  ];
-
   const [isEnabled, setIsEnabled] = useState(true);
   const toggleSwitch = (isEnabled: boolean) => setIsEnabled(isEnabled);
 
@@ -63,7 +37,7 @@ const SettingsScreen = () => {
       case 'icon':
         return <Image source={option.value} style={styles.ic_forward} />;
       case 'text':
-        return <Text style={styles.title}>{option.label}</Text>;
+        return <Text style={styles.title}>{option.value}</Text>;
       default:
         return null;
     }
@@ -105,6 +79,33 @@ const SettingsScreen = () => {
       installMode: codePush.InstallMode.IMMEDIATE,
     });
   };
+  const sections: SectionProps[] = [
+    {
+      label: 'Section title 1',
+      options: [
+        {
+          label: 'Theme',
+          type: 'switch',
+          value: 'Option 1',
+          onPress: () => {},
+        },
+        {
+          label: 'Version',
+          type: 'text',
+          value: 'Option 2',
+          onPress: () => {},
+        },
+        {
+          label: 'Check for updates',
+          type: 'icon',
+          value: icons.ic_next,
+          onPress: () => {
+            onButtonPress();
+          },
+        },
+      ],
+    },
+  ];
 
   return (
     <View style={styles.root}>
