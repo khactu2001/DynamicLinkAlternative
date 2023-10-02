@@ -16,6 +16,7 @@ import {RenderItemType} from '~models/common-model';
 import {TImage} from '~models/image-model';
 import {ScreensProps} from '~navigation/types';
 import ListItemImage from './components/ListItemImage';
+import {useGetPhotos} from '~utils/hooks/useCustomHook';
 
 const SCREEN_DIMENSION = Dimensions.get('screen');
 const SCREEN_RATIO = SCREEN_DIMENSION.width / SCREEN_DIMENSION.height;
@@ -29,7 +30,7 @@ const FeedScreen = ({navigation, route}: ScreensProps<'FeedScreen'>) => {
   });
 
   const insets = useSafeAreaInsets();
-  const {data, fetchNextPage, hasNextPage} = useFetchImages({
+  const {data, fetchNextPage, hasNextPage} = useGetPhotos({
     page: 1,
     order_by: 'latest',
     per_page: 20,

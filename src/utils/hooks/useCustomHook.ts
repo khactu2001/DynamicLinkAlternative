@@ -1,11 +1,13 @@
-import {useInfiniteQuery} from '@tanstack/react-query';
-import API from './api';
+import {UseInfiniteQueryOptions, useInfiniteQuery} from '@tanstack/react-query';
+import API from '../../api/api';
 
 const HOME_PATHNAME = {
   GET_IMAGES_URL: 'photos/',
   SEARCH_IMAGES_URL: 'search/',
   GET_RANDOM_IMAGES_URL: 'photos/random',
 };
+
+export const GET_PHOTOS_KEY = 'get-photos';
 
 type InfiniteQueryParams = {
   pageParam: number;
@@ -17,7 +19,7 @@ type TGetImagesParams = {
 } & InfiniteQueryParams;
 
 const api = new API();
-const getImages = async (
+const getPhotos = async (
   props: TGetImagesParams = {
     page: 1,
     per_page: 20,
@@ -38,18 +40,14 @@ const getImages = async (
   };
 };
 
-export const useFetchImages = (props?: TGetImagesParams) => {
+export const useGetPhotos = (props: TGetImagesParams) => {
   return useInfiniteQuery({
-    queryKey: ['/photos'],
-    queryFn: ({pageParam = 1}) =>
-      getImages({
-        ...props!,
+    queryKey: [GET_PHOTOS_KEY],
+    queryFn: ({pageParam}) =>
+      getPhotos({
+        ...props,
         pageParam,
       }),
-    getNextPageParam: (lastPage, allPages) => {
-      if (lastPage.nextPageParam > 40) return undefined;
-      return lastPage.nextPageParam;
-    },
-    keepPreviousData: true,
+    getNextPageParam: lastPage => lastPage.nextPageParam,
   });
 };

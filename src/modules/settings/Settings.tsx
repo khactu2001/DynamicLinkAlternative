@@ -61,7 +61,7 @@ const SettingsScreen = () => {
     );
   };
 
-  const onButtonPress = () => {
+  const checkForUpdates = () => {
     codePush.getCurrentPackage().then(update => {
       // If the current app "session" represents the first time
       // this update has run, and it had a description provided
@@ -100,7 +100,7 @@ const SettingsScreen = () => {
           type: 'icon',
           value: icons.ic_next,
           onPress: () => {
-            onButtonPress();
+            checkForUpdates();
           },
         },
       ],

@@ -2,25 +2,23 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios, {AxiosHeaders, AxiosRequestConfig} from 'axios';
 import {Alert} from 'react-native';
 import {ListImages} from '~models/image-model';
+import Config from 'react-native-config';
 
 // const BASE_URL = process.env.API_IMAGES;
 // const CLIENT_ID = process.env.CLIENT_ID;
 // const ACCESS_KEY = process.env.ACCESS_KEY;
 
-const BASE_URL = 'https://api.unsplash.com/';
-const ACCESS_KEY = '4tNBFTHNRJGTfp5GomITIsfgoMktNh0Lu8wRAyBnyWA';
+const {BASE_URL, ACCESS_KEY} = Config;
+// const ACCESS_KEY = '4tNBFTHNRJGTfp5GomITIsfgoMktNh0Lu8wRAyBnyWA';
 
-type TParams = {
+type TParams = AxiosRequestConfig & {
   [key: string]: string | number | boolean;
 };
 export default class AxiosService {
   private requestConfig = async (props: AxiosRequestConfig) => {
     try {
-      // const accessKey = await AsyncStorage.getItem('accessKey');
-      // if (accessKey) {
       props.headers = {};
       props.headers.Authorization = `Client-ID ${ACCESS_KEY}`;
-      // }
 
       const result = await axios.request(props);
       const data: ListImages = result.data;
