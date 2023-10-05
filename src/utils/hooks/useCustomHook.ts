@@ -27,27 +27,23 @@ const getPhotos = async (
     pageParam: 1,
   },
 ) => {
-  props.page = props.pageParam;
   const results = await api.get(HOME_PATHNAME.GET_IMAGES_URL, props);
-  // console.log(
-  //   '---call api---',
-  //   results?.map(item => item.id),
-  //   props.pageParam,
-  // );
   return {
     result: results,
-    nextPageParam: props.pageParam + 1,
+    nextPageParam: (props.page as number) + 1,
   };
 };
 
 export const useGetPhotos = (props: TGetImagesParams) => {
   return useInfiniteQuery({
     queryKey: [GET_PHOTOS_KEY],
-    queryFn: ({pageParam}) =>
+    queryFn: ({pageParam = 1}) =>
       getPhotos({
         ...props,
-        pageParam,
+        page: pageParam,
       }),
-    getNextPageParam: lastPage => lastPage.nextPageParam,
+    getNextPageParam: lastPage => {
+      return lastPage.nextPageParam;
+    },
   });
 };
