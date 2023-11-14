@@ -23,7 +23,7 @@ const SCREEN_RATIO = SCREEN_DIMENSION.width / SCREEN_DIMENSION.height;
 const NUM_COLUMNS = 3;
 const MARGIN = 8;
 const WIDTH_IMAGE = (SCREEN_DIMENSION.width - (NUM_COLUMNS + 1) * MARGIN) / 3;
-const FeedScreen = ({navigation, route}: ScreensProps<'FeedScreen'>) => {
+const FeedScreen = () => {
   const [modalOptions, setModalOptions] = useState({
     visible: false,
     index: 0,
@@ -40,7 +40,7 @@ const FeedScreen = ({navigation, route}: ScreensProps<'FeedScreen'>) => {
   // const flattenImages = useMemo(() => {
   //   return data?.pages.flatMap(page => page.result);
   // }, [data]);
-  const flattenImages = data?.pages?.flatMap(page => page.result);
+  const flattenImages = data?.pages?.flatMap(page => page.result) || [];
 
   const getMoreImages = () => {
     hasNextPage && fetchNextPage();

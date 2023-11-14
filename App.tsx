@@ -3,6 +3,7 @@ import * as React from 'react';
 import NavigationTree from '~navigation/Navigation';
 import useConnectedStatus from '~utils/network';
 import './src/i18n/i18n';
+import 'react-native-gesture-handler';
 
 const queryClient = new QueryClient();
 

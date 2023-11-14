@@ -10,6 +10,7 @@ import {
   Dimensions,
 } from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import Svg, {Path} from 'react-native-svg';
 import {icons} from '~assets/icons';
 
 const bottom_bar_icons = [icons.ic_home, icons.ic_task, icons.ic_settings];
@@ -22,7 +23,7 @@ const WIDTH_BOTTOM_TAB =
 const HEIGHT_CURLY = HEIGHT_NOTCH / 2;
 
 // const COLOR_BOTTOM_BAR = '#FFF';
-const COLOR_BOTTOM_BAR = '#4DB6AC';
+const COLOR_BOTTOM_BAR = 'transparent';
 const COLOR_FLOAT_BUTTON = '#76FF03';
 function CustomBottomBar({state, descriptors, navigation}: BottomTabBarProps) {
   const insets = useSafeAreaInsets();
@@ -37,6 +38,15 @@ function CustomBottomBar({state, descriptors, navigation}: BottomTabBarProps) {
           ? {height: styles.bar_container.height + insets.bottom}
           : null,
       ]}>
+      {/* <Svg
+        height="50"
+        width="100%"
+        viewBox="0 0 100 50"
+        style={{
+          position: 'absolute',
+        }}>
+        <Path d="M0 0 Q 50 -10, 100 0 L 100 50 L 0 50 Z" fill="#3498db" />
+      </Svg> */}
       {state.routes.map((route, index) => {
         const {options} = descriptors[route.key];
         const label =
@@ -47,39 +57,39 @@ function CustomBottomBar({state, descriptors, navigation}: BottomTabBarProps) {
             : route.name;
         const isFocused = state.index === index;
         // console.log('isFocused', isFocused);
-        const translateYValue = useRef(new Animated.Value(0)).current;
-        const translateY = (index: number) => {
-          // console.log(
-          //   `'translateYValue.current[index]' ${index}`,
-          //   translateYValue,
-          // );
-          Animated.timing(translateYValue, {
-            toValue: -HEIGHT_NOTCH / 2,
-            duration: 500,
-            useNativeDriver: true,
-          }).start();
-        };
-        const translateYBack = (index: number) => {
-          Animated.timing(translateYValue, {
-            toValue: 0,
-            duration: 1000,
-            useNativeDriver: true,
-          }).start();
-        };
+        // const translateYValue = useRef(new Animated.Value(0)).current;
+        // const translateY = (index: number) => {
+        //   // console.log(
+        //   //   `'translateYValue.current[index]' ${index}`,
+        //   //   translateYValue,
+        //   // );
+        //   Animated.timing(translateYValue, {
+        //     toValue: -HEIGHT_NOTCH / 2,
+        //     duration: 500,
+        //     useNativeDriver: true,
+        //   }).start();
+        // };
+        // const translateYBack = (index: number) => {
+        //   Animated.timing(translateYValue, {
+        //     toValue: 0,
+        //     duration: 1000,
+        //     useNativeDriver: true,
+        //   }).start();
+        // };
 
-        isFocused && translateY(state.index);
+        // isFocused && translateY(state.index);
 
-        useEffect(() => {
-          return () => {
-            // console.log('removed index', state.index);
-            // console.log('current focus', isFocused);
-            if (isFocused) {
-              translateYBack(state.index);
-            } else {
-              translateY(state.index);
-            }
-          };
-        }, [isFocused]);
+        // useEffect(() => {
+        //   return () => {
+        //     // console.log('removed index', state.index);
+        //     // console.log('current focus', isFocused);
+        //     if (isFocused) {
+        //       translateYBack(state.index);
+        //     } else {
+        //       translateY(state.index);
+        //     }
+        //   };
+        // }, [isFocused]);
 
         const onPress = () => {
           const event = navigation.emit({
@@ -118,27 +128,41 @@ function CustomBottomBar({state, descriptors, navigation}: BottomTabBarProps) {
             key={route.key}
             style={styles.touch_bottom}>
             <Animated.View
-              style={[
-                isFocused
-                  ? {
-                      ...styles.float_view,
-                      transform: [
-                        {
-                          translateY: translateYValue,
-                        },
-                      ],
-                    }
-                  : null,
-              ]}>
+            // style={[
+            //   isFocused
+            //     ? {
+            //         ...styles.float_view,
+            //         transform: [
+            //           {
+            //             translateY: translateYValue,
+            //           },
+            //         ],
+            //       }
+            //     : null,
+            // ]}
+            >
               <Image
                 source={bottom_bar_icons[index]}
                 style={[
                   styles.ic_bottom,
                   {
                     tintColor: isFocused ? '#673ab7' : '#222',
+                    // marginTop: isFocused
+                    //   ? -(HEIGHT_BOTTOM_BAR - HEIGHT_ICON)
+                    //   : undefined,
                   },
                 ]}
               />
+
+              {/* <Svg height="50" width="100" viewBox="0 0 100 50">
+                <Path
+                  d="M0 25 Q 50 5, 100 25"
+                  fill="transparent"
+                  stroke="black"
+                  strokeWidth="2"
+                />
+              </Svg> */}
+
               {/* <View
                 style={
                   isFocused
@@ -179,11 +203,13 @@ function CustomBottomBar({state, descriptors, navigation}: BottomTabBarProps) {
 
 const styles = StyleSheet.create({
   bar_container: {
+    ...StyleSheet.absoluteFillObject,
+    top: undefined,
     flexDirection: 'row',
     // ...styles.shadow,
     backgroundColor: COLOR_BOTTOM_BAR,
     // paddingVertical: 8,
-    zIndex: 10,
+    // zIndex: 10,
     height: HEIGHT_BOTTOM_BAR,
   },
   ic_bottom: {width: HEIGHT_ICON, height: HEIGHT_ICON},
@@ -192,6 +218,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     // backgroundColor: 'red',
+    marginHorizontal: 2,
   },
   shadow: {
     shadowColor: '#000',

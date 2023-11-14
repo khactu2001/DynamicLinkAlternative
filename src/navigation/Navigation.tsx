@@ -1,16 +1,19 @@
-import * as React from 'react';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import * as React from 'react';
+import {Text} from 'react-native';
+import AboutScreen from '~modules/about/About';
 import FeedScreen from '~modules/feed/Feed';
+import HomeScreen from '~modules/home/Home';
+import NoticeScreen from '~modules/notice/Notice';
 import SettingsScreen from '~modules/settings/Settings';
 import {RootStackParamList} from '~navigation/types';
-import HomeScreen from '~modules/home/Home';
-import {Linking, Text} from 'react-native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Home from '~modules/home/Home';
 import CustomBottomBar from '~sharedComponents/bottom-bar/CustomBottomBar';
 
 const BottomTab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
 const NativeStack = createNativeStackNavigator<RootStackParamList>();
 export default function NavigationTree() {
@@ -55,11 +58,47 @@ export default function NavigationTree() {
       </NativeStack.Navigator> */}
 
       {/* bottom tab */}
-      <BottomTab.Navigator tabBar={props => <CustomBottomBar {...props} />}>
+      {/* <BottomTab.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+        tabBar={props => <CustomBottomBar {...props} />}>
         <BottomTab.Screen name="HomeScreen" component={HomeScreen} />
         <BottomTab.Screen name="FeedScreen" component={FeedScreen} />
         <BottomTab.Screen name="SettingsScreen" component={SettingsScreen} />
-      </BottomTab.Navigator>
+      </BottomTab.Navigator> */}
+      <MainTabs />
+
+      {/* <Drawer.Navigator
+        screenOptions={{
+          unmountOnBlur: true, // This is the key prop to disable active state
+        }}>
+        <Drawer.Screen name="AboutScreen" component={AboutScreen} />
+      </Drawer.Navigator> */}
     </NavigationContainer>
+  );
+}
+
+function MainTabs() {
+  return (
+    <BottomTab.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+      tabBar={props => <CustomBottomBar {...props} />}>
+      <BottomTab.Screen name="HomeScreen" component={HomeScreen} />
+      <BottomTab.Screen name="FeedScreen" component={FeedScreen} />
+      <BottomTab.Screen name="SettingsScreen" component={SettingsScreen} />
+    </BottomTab.Navigator>
+  );
+}
+
+function HomeDrawer() {
+  return (
+    <Drawer.Navigator>
+      {/* <Drawer.Screen name="HomeScreen" component={HomeScreen} /> */}
+      {/* <Drawer.Screen name="AboutScreen" component={AboutScreen} />
+      <Drawer.Screen name="NoticeScreen" component={NoticeScreen} /> */}
+    </Drawer.Navigator>
   );
 }

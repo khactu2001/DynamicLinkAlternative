@@ -29,7 +29,7 @@ const getPhotos = async (
 ) => {
   const results = await api.get(HOME_PATHNAME.GET_IMAGES_URL, props);
   return {
-    result: results,
+    result: results ?? [],
     nextPageParam: (props.page as number) + 1,
   };
 };
