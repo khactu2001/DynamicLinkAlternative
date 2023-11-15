@@ -27,10 +27,10 @@ jobs:
           distribution: 'adopt'
           java-version: '8'
 
-      - name: Set up Android SDK
-        uses: wzieba/FakeAndroidEnvironment@v1
-        with:
-          sdk-version: '30'
+      # - name: Set up Android SDK
+      #   uses: wzieba/FakeAndroidEnvironment@v1
+      #   with:
+      #     sdk-version: '30'
 
       - name: Build APK
         run: |
