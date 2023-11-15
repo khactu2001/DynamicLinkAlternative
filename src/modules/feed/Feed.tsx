@@ -76,11 +76,6 @@ const FeedScreen = () => {
     existingData.pages[page_index].result = [...updatedList];
 
     queryClient.setQueryData([GET_PHOTOS_KEY], existingData);
-
-    // console.log(
-    //   '=queryClient.getQueryData([GET_PHOTOS_KEY])=',
-    //   queryClient.getQueryData([GET_PHOTOS_KEY]),
-    // );
   };
 
   const renderImage = ({item, index}: RenderItemType<TImage>) => {
