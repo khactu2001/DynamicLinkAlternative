@@ -23,10 +23,11 @@ jobs:
       - name: check node version
         run: |
           echo $HOME
-          ls
-          git -v
-          git branch
-          git status
+          # ls
+          # git -v
+          # git branch
+          # git status
+          ping www.google.com
 
       # - name: Run Tests
       #   run: npm test
