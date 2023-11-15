@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: CI/CD Pipeline DynamicLink
 
 on:
   push:
@@ -6,10 +6,8 @@ on:
       - dev
 
 jobs:
-  Run install on macos
-  build:
+  Run-macos:
     runs-on: macos-latest
-
     steps:
       # - name: Checkout Repository
       #   uses: actions/checkout@v2
