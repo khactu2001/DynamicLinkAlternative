@@ -22,13 +22,12 @@ jobs:
 
       - name: check node version
         run: |
-          echo $HOME
-          # ls
+          ls
           # git -v
           # git branch
           # git status
-          git init
-          git branch
+          # git init
+          # git branch
 
       # - name: Run Tests
       #   run: npm test
