@@ -9,26 +9,27 @@ jobs:
   Run-macos:
     runs-on: macos-latest
     steps:
-      # - name: Checkout Repository
-      #   uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-      # - name: Set up Node.js
-      #   uses: actions/setup-node@v2
-      #   with:
-      #     node-version: '14'
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          working-directory:
 
       - name: Install Dependencies
-        run: yarn android
+        run: yarn -i
       # - name: Checkout Repository
       #   uses: actions/checkout@v2
 
-      # - name: Check if Repository is Cloned
-      #   run: |
-      #     if [ -d "${{ github.workspace }}" ]; then
-      #       echo "Repository exists."
-      #     else
-      #       echo "Repository does not exist."
-      #     fi
+      - name: Check if Repository is Cloned
+        run: |
+          if [ -d "${{ github.workspace }}" ]; then
+            echo "Repository exists."
+          else
+            echo "Repository does not exist."
+          fi
       # - name: check node version
       #   run: |
       #     ls
