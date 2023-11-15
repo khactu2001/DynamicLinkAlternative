@@ -29,6 +29,7 @@ jobs:
           # git status
           # git init
           # git branch
+          ls -R ~/Users/runner/work/DynamicLinkAlternative/DynamicLinkAlternative
 
       # - name: Run Tests
       #   run: npm test
