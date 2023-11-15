@@ -22,7 +22,7 @@ jobs:
 
       - name: os
         run: echo "The operating system on the runner is not Windows, it's $RUNNER_OS."
-      # - name: path
+      - name: path
         run: echo GITHUB_API_URL
 
       # - name: Run Tests
