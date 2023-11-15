@@ -1,7 +1,8 @@
 import {useEffect, useRef, useState} from 'react';
-import {Animated, StyleSheet, Text, View, ViewStyle} from 'react-native';
+import {Animated, Image, StyleSheet, Text, View, ViewStyle} from 'react-native';
 import FastImage, {FastImageProps} from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
+import {icons} from '~assets/icons';
 type TypeListItemImageProps = {
   imageProps: FastImageProps;
   containerStyle: ViewStyle;
@@ -9,7 +10,7 @@ type TypeListItemImageProps = {
 export default function (listItemImageProps: TypeListItemImageProps) {
   const [loading, setLoading] = useState<boolean>(true);
   const {imageProps, containerStyle} = listItemImageProps;
-  const {width, height} = imageProps.style;
+  const {width} = imageProps.style;
   const transitionValue = useRef(new Animated.Value(0)).current;
   useEffect(() => {
     const animation = Animated.loop(

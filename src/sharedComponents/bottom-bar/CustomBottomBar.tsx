@@ -23,7 +23,7 @@ const WIDTH_BOTTOM_TAB =
 const HEIGHT_CURLY = HEIGHT_NOTCH / 2;
 
 // const COLOR_BOTTOM_BAR = '#FFF';
-const COLOR_BOTTOM_BAR = 'transparent';
+const COLOR_BOTTOM_BAR = '#FFF';
 const COLOR_FLOAT_BUTTON = '#76FF03';
 function CustomBottomBar({state, descriptors, navigation}: BottomTabBarProps) {
   const insets = useSafeAreaInsets();
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    // backgroundColor: 'red',
+    // backgroundColor: 'rgba(255, 255, 255, 1)',
     marginHorizontal: 2,
   },
   shadow: {

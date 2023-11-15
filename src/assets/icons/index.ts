@@ -4,4 +4,5 @@ export const icons = {
   ic_task: require('./bottom-bar/task.png'),
 
   ic_next: require('./settings/next.png'),
+  ic_check: require('./feed/check.png'),
 };

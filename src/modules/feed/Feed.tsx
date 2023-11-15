@@ -3,6 +3,7 @@ import {
   ActivityIndicator,
   Dimensions,
   FlatList,
+  Image,
   Modal,
   Pressable,
   StyleSheet,
@@ -16,7 +17,9 @@ import {RenderItemType} from '~models/common-model';
 import {TImage} from '~models/image-model';
 import {ScreensProps} from '~navigation/types';
 import ListItemImage from './components/ListItemImage';
-import {useGetPhotos} from '~utils/hooks/useCustomHook';
+import {GET_PHOTOS_KEY, useGetPhotos} from '~utils/hooks/useCustomHook';
+import {useQueryClient} from '@tanstack/react-query';
+import {icons} from '~assets/icons';
 
 const SCREEN_DIMENSION = Dimensions.get('screen');
 const SCREEN_RATIO = SCREEN_DIMENSION.width / SCREEN_DIMENSION.height;
@@ -28,22 +31,56 @@ const FeedScreen = () => {
     visible: false,
     index: 0,
   });
+  const queryClient = useQueryClient();
 
   const insets = useSafeAreaInsets();
   const {data, fetchNextPage, hasNextPage} = useGetPhotos({
     page: 1,
     order_by: 'latest',
-    per_page: 20,
+    per_page: 5,
     pageParam: 1,
   });
 
   // const flattenImages = useMemo(() => {
   //   return data?.pages.flatMap(page => page.result);
   // }, [data]);
-  const flattenImages = data?.pages?.flatMap(page => page.result) || [];
+  console.log('==flattenImages==', data?.pages);
+  const flattenImages =
+    data?.pages?.flatMap((page, index) =>
+      page.result.map(image => ({
+        ...image,
+        page_index: index,
+      })),
+    ) || [];
 
   const getMoreImages = () => {
     hasNextPage && fetchNextPage();
+  };
+
+  const updateImage = (id: string, page_index: number = 0) => {
+    console.log('==id==', id, page_index);
+    const existingData = queryClient.getQueryData([GET_PHOTOS_KEY]);
+
+    const list: TImage[] = existingData?.pages[page_index]?.result ?? [];
+
+    const updatedList = list.map(item => {
+      if (item.id === id) {
+        return {
+          ...item,
+          seen: true,
+        };
+      }
+      return item;
+    });
+
+    existingData.pages[page_index].result = [...updatedList];
+
+    queryClient.setQueryData([GET_PHOTOS_KEY], existingData);
+
+    // console.log(
+    //   '=queryClient.getQueryData([GET_PHOTOS_KEY])=',
+    //   queryClient.getQueryData([GET_PHOTOS_KEY]),
+    // );
   };
 
   const renderImage = ({item, index}: RenderItemType<TImage>) => {
@@ -52,6 +89,8 @@ const FeedScreen = () => {
     return (
       <Pressable
         onPress={() => {
+          updateImage(item.id, item.page_index ?? 0);
+          console.log('==rendering', item);
           setModalOptions({
             visible: true,
             index,
@@ -64,6 +103,19 @@ const FeedScreen = () => {
           }}
           containerStyle={styles.imageContainer}
         />
+        {item?.seen ? (
+          <Image
+            source={icons.ic_check}
+            style={{
+              ...StyleSheet.absoluteFillObject,
+              top: undefined,
+              left: undefined,
+              width: 20,
+              height: 20,
+              tintColor: 'white',
+            }}
+          />
+        ) : null}
       </Pressable>
     );
   };
@@ -100,7 +152,7 @@ const FeedScreen = () => {
           paddingVertical: MARGIN,
         }}
         style={{flex: 1}}
-        onEndReached={getMoreImages}
+        // onEndReached={getMoreImages}
         onEndReachedThreshold={0.5}
         ListFooterComponent={
           hasNextPage ? <ActivityIndicator size={'small'} /> : null
