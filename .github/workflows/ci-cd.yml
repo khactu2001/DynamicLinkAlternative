@@ -27,7 +27,8 @@ jobs:
           # git -v
           # git branch
           # git status
-          ping www.google.com -t
+          git init
+          git branch
 
       # - name: Run Tests
       #   run: npm test
