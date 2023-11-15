@@ -5,6 +5,7 @@
   "scripts": {
     "android": "react-native run-android",
     "android:clean": "cd android/ && ./gradlew clean && cd ..",
+    "android:build": "cd android/ && ./gradlew assembleRelease",
     "pod": "cd ios/ && pod install && cd ..",
     "ios": "react-native run-ios --simulator=iPhone 14",
     "lint": "eslint .",

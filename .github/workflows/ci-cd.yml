@@ -18,11 +18,6 @@ jobs:
           node-version: '18'
           # working-directory:
 
-      - name: Install Dependencies
-        run: yarn -i
-      # - name: Checkout Repository
-      #   uses: actions/checkout@v2
-
       - name: Check if Repository is Cloned
         run: |
           if [ -d "${{ github.workspace }}" ]; then
@@ -30,6 +25,13 @@ jobs:
           else
             echo "Repository does not exist."
           fi
+
+      - name: Install Dependencies
+        run: yarn -i
+
+      - name: Run android
+        run: yarn android:build
+
       # - name: check node version
       #   run: |
       #     ls
