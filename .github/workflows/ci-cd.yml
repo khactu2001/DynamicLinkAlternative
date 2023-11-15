@@ -24,6 +24,9 @@ jobs:
         run: |
           echo $HOME
           ls
+          git -v
+          git branch
+          git status
 
       # - name: Run Tests
       #   run: npm test
