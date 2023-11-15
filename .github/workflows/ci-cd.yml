@@ -25,6 +25,8 @@ jobs:
           node -v
           npm -v
           yarn -v
+          yarn -i
+          ls
 
       # - name: Run Tests
       #   run: npm test
