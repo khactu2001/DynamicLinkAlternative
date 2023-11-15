@@ -21,6 +21,17 @@ jobs:
       - name: Install Dependencies
         run: yarn -i
 
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '8'
+
+      - name: Set up Android SDK
+        uses: wzieba/FakeAndroidEnvironment@v1
+        with:
+          sdk-version: '30'
+
       - name: Build APK
         run: |
           npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
