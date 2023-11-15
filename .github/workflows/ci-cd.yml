@@ -17,8 +17,14 @@ jobs:
       #   with:
       #     node-version: '14'
 
-      - name: Install Dependencies
-        run: npm run install
+      # - name: Install Dependencies
+      #   run: npm run install
+      - name: condition 1
+        if: runner.os == 'Windows'
+        run: echo "The operating system on the runner is $env:RUNNER_OS."
+      - name: condition 2
+        if: runner.os != 'Windows'
+        run: echo "The operating system on the runner is not Windows, it's $RUNNER_OS."
 
       # - name: Run Tests
       #   run: npm test
