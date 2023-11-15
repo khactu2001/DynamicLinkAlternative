@@ -19,17 +19,25 @@ jobs:
 
       # - name: Install Dependencies
       #   run: npm run install
+      # - name: Checkout Repository
+      #   uses: actions/checkout@v2
 
-      - name: check node version
+      - name: Check if Repository is Cloned
         run: |
-          ls
-          pwd
-          # git -v
-          # git branch
-          # git status
-          # git init
-          # git branch
-          ls -R $HOME/work/DynamicLinkAlternative/DynamicLinkAlternative
+          if [ -d "${{ github.workspace }}/DynamicLinkAlternative" ]; then
+            echo "Repository exists."
+          else
+            echo "Repository does not exist."
+      # - name: check node version
+      #   run: |
+      #     ls
+      #     pwd
+      #     # git -v
+      #     # git branch
+      #     # git status
+      #     # git init
+      #     # git branch
+      #     ls -R $HOME/work/DynamicLinkAlternative/DynamicLinkAlternative
 
       # - name: Run Tests
       #   run: npm test
