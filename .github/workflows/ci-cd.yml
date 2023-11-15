@@ -22,10 +22,7 @@ jobs:
 
       - name: check node version
         run: |
-          node -v
-          npm -v
-          yarn -v
-          yarn -i
+          echo $HOME
           ls
 
       # - name: Run Tests
