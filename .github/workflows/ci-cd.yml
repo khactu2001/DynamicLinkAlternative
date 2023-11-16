@@ -3,7 +3,7 @@ name: Test cicd
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
   build-apk:
