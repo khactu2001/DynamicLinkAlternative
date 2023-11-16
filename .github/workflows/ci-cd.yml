@@ -7,10 +7,13 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+
+      - name: List all items
+        run: ls
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
