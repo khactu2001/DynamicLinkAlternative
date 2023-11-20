@@ -1,0 +1,59 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Distribute app to firebase app distribution"
+    lane :distribute do
+      # clean assemble
+      gradle(task: "clean")
+
+      # get version number
+      latest_release = firebase_app_distribution_get_latest_release(
+        app: "1:295029911394:android:d5ab497383eadbd8e6463b"
+      )
+      puts "build_number, #{latest_release}!"
+
+      # check null for the first time
+      if latest_release.nil?
+        new_version_code = 1
+      else
+        new_version_code = latest_release[:buildVersion].to_i + 1
+      end
+      
+      # increase version code number
+      new_code = increment_version_code({ 
+        version_code: new_version_code,
+      })
+
+      # set version name
+      new_name = android_set_version_name(
+        version_name: "1.0.#{new_code}"
+      )
+      puts "build_number, #{new_name}!"
+
+      # build
+      gradle(task: "assembleRelease")
+
+      # distribute
+      firebase_app_distribution(
+          app: "1:295029911394:android:d5ab497383eadbd8e6463b",
+          testers: "lktubom3@gmail.com",
+          release_notes: "Lots of amazing new features to test out!",
+          firebase_cli_token:"1//0eHTFv4pdFdx7CgYIARAAGA4SNwF-L9IrGpGpjakgPEOmYa4lZqlDBubCSzipJUolnSaPF0tB4KTOR6rjdOeaB1YQlLJiTQztAHc"
+      )
+  end
+end

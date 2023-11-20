@@ -36,78 +36,12 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:295029911394:android:31ab6160b6469918e6463b",
-        "android_client_info": {
-          "package_name": "com.android.dynamiclinkalternative"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "295029911394-okmgcp1ca3rd5d3q3cuijdbtng69e2gt.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBcIJjjKjehsRqElQ89VQG22shTbBjqons"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "295029911394-okmgcp1ca3rd5d3q3cuijdbtng69e2gt.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:295029911394:android:d5ab497383eadbd8e6463b",
         "android_client_info": {
           "package_name": "com.dynamiclinkalternative"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "295029911394-okmgcp1ca3rd5d3q3cuijdbtng69e2gt.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBcIJjjKjehsRqElQ89VQG22shTbBjqons"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "295029911394-okmgcp1ca3rd5d3q3cuijdbtng69e2gt.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:295029911394:android:7aed44f3618a84a7e6463b",
-        "android_client_info": {
-          "package_name": "com.lumens"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "295029911394-om1j52vginf4qv99pnr8ufocs37mcrst.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.lumens",
-            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
-          }
-        },
         {
           "client_id": "295029911394-okmgcp1ca3rd5d3q3cuijdbtng69e2gt.apps.googleusercontent.com",
           "client_type": 3
