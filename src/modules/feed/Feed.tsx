@@ -37,7 +37,7 @@ const FeedScreen = () => {
   const {data, fetchNextPage, hasNextPage} = useGetPhotos({
     page: 1,
     order_by: 'latest',
-    per_page: 5,
+    per_page: 20,
     pageParam: 1,
   });
 
@@ -147,7 +147,7 @@ const FeedScreen = () => {
           paddingVertical: MARGIN,
         }}
         style={{flex: 1}}
-        // onEndReached={getMoreImages}
+        onEndReached={getMoreImages}
         onEndReachedThreshold={0.5}
         ListFooterComponent={
           hasNextPage ? <ActivityIndicator size={'small'} /> : null

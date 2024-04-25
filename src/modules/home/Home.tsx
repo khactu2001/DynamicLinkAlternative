@@ -40,6 +40,13 @@ const HomeScreen = ({navigation, route}: ScreensProps<'HomeScreen'>) => {
             : 'Sử dụng tiếng Anh'
         }
       />
+
+      <Button
+        onPress={() => {
+          navigation.push('TodoScreen');
+        }}
+        title={'Go to todo screen'}
+      />
       {/* <Button
         onPress={() => {
           i18n

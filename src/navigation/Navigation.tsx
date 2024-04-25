@@ -9,6 +9,7 @@ import FeedScreen from '~modules/feed/Feed';
 import HomeScreen from '~modules/home/Home';
 import NoticeScreen from '~modules/notice/Notice';
 import SettingsScreen from '~modules/settings/Settings';
+import TodoScreen from '~modules/todo/Todo';
 import {RootStackParamList} from '~navigation/types';
 import CustomBottomBar from '~sharedComponents/bottom-bar/CustomBottomBar';
 
@@ -67,8 +68,22 @@ export default function NavigationTree() {
         <BottomTab.Screen name="FeedScreen" component={FeedScreen} />
         <BottomTab.Screen name="SettingsScreen" component={SettingsScreen} />
       </BottomTab.Navigator> */}
-      <MainTabs />
 
+      <NativeStack.Navigator
+        screenOptions={{
+          // headerShown: false,
+          headerBackTitleVisible: false,
+          headerStyle: {
+            backgroundColor: '#6200EE',
+          },
+          headerTintColor: '#fff',
+        }}>
+        <NativeStack.Screen name="MainTabs" component={MainTabs} />
+        <NativeStack.Screen name="TodoScreen" component={TodoScreen} />
+
+        <NativeStack.Screen name="AboutScreen" component={AboutScreen} />
+        <NativeStack.Screen name="NoticeScreen" component={NoticeScreen} />
+      </NativeStack.Navigator>
       {/* <Drawer.Navigator
         screenOptions={{
           unmountOnBlur: true, // This is the key prop to disable active state

@@ -8,6 +8,8 @@ export type RootStackParamList = {
   FeedScreen: {
     userId: string;
   };
+  TodoScreen: undefined;
+  MainTabs: undefined;
 };
 
 export type ScreensProps<T extends keyof RootStackParamList> =

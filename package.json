@@ -35,6 +35,7 @@
     "react-native-appsflyer": "^6.12.2",
     "react-native-code-push": "^8.1.0",
     "react-native-config": "^1.5.1",
+    "react-native-element-dropdown": "^2.10.4",
     "react-native-fast-image": "^8.6.3",
     "react-native-gesture-handler": "^2.13.4",
     "react-native-linear-gradient": "^2.8.3",

@@ -1,8 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios, {AxiosHeaders, AxiosRequestConfig} from 'axios';
+import axios, {AxiosHeaders, AxiosRequestConfig, AxiosResponse} from 'axios';
 import {Alert} from 'react-native';
 import {ListImages} from '~models/image-model';
 import Config from 'react-native-config';
+import BaseModel from '~models/base_api_model';
 
 // const BASE_URL = process.env.API_IMAGES;
 // const CLIENT_ID = process.env.CLIENT_ID;
@@ -21,7 +22,8 @@ export default class AxiosService {
       props.headers.Authorization = `Client-ID ${ACCESS_KEY}`;
 
       const result = await axios.request(props);
-      const data: ListImages = result.data;
+      // const baseResponse: AxiosResponse = result;
+      const data = result.data;
       return data;
     } catch (error) {
       // handle error here
@@ -42,6 +44,7 @@ export default class AxiosService {
         console.log('Error', error.message);
       }
       console.log(error.config);
+      return null;
     }
   };
 
