@@ -5,6 +5,8 @@ import {
 } from '@tanstack/react-query';
 import API from '../../api/api';
 import {TImage} from '~models/image-model';
+import {BaseQueryParams, InfiniteQueryParams} from '~models/common-model';
+import {getCollections} from '~api/collection-api';
 
 const HOME_PATHNAME = {
   GET_IMAGES_URL: 'photos/',
@@ -15,10 +17,8 @@ const HOME_PATHNAME = {
 
 export const GET_PHOTOS_KEY = 'get-photos';
 export const SEARCH_PHOTOS_KEY = 'search-photos';
+export const GET_COLLECTIONS_KEY = 'get-collections';
 
-type InfiniteQueryParams = {
-  pageParam: number;
-};
 type TImagesParams = 'page' | 'per_page' | 'order_by' | 'query';
 
 type SearchPhotoResponse = {
@@ -98,6 +98,24 @@ export const useSearchPhotos = (props: TSearchImagesParams) => {
       );
       if (lastPage.total <= currentItemsLength) return undefined;
       return currentPage + 1;
+    },
+  });
+};
+
+const getQueryKeyCollection = () => {
+  return [GET_COLLECTIONS_KEY];
+};
+
+export const useInfiniteQueryCollection = (props: BaseQueryParams) => {
+  return useInfiniteQuery({
+    queryKey: getQueryKeyCollection(),
+    queryFn: ({pageParam = 1}) =>
+      getCollections({
+        ...props,
+        pageParam: pageParam,
+      }),
+    getNextPageParam: lastPage => {
+      return lastPage.nextPageParam;
     },
   });
 };

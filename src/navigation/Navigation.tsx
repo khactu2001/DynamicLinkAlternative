@@ -12,7 +12,11 @@ import SettingsScreen from '~modules/settings/Settings';
 import TodoScreen from '~modules/todo/Todo';
 import {RootStackParamList} from '~navigation/types';
 import CustomBottomBar from '~sharedComponents/bottom-bar/CustomBottomBar';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import Collection from '~modules/feed/sub_pages/collection/Collection';
+import User from '~modules/feed/sub_pages/User';
 
+const TopTab = createMaterialTopTabNavigator();
 const BottomTab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -102,9 +106,20 @@ function MainTabs() {
       }}
       tabBar={props => <CustomBottomBar {...props} />}>
       <BottomTab.Screen name="HomeScreen" component={HomeScreen} />
-      <BottomTab.Screen name="FeedScreen" component={FeedScreen} />
+      {/* <BottomTab.Screen name="FeedScreen" component={FeedScreen} /> */}
+      <BottomTab.Screen name="FeedScreen" component={FeedTopTabs} />
+
       <BottomTab.Screen name="SettingsScreen" component={SettingsScreen} />
     </BottomTab.Navigator>
+  );
+}
+
+function FeedTopTabs() {
+  return (
+    <TopTab.Navigator>
+      <TopTab.Screen name="Collection" component={Collection} />
+      <TopTab.Screen name="User" component={User} />
+    </TopTab.Navigator>
   );
 }
 

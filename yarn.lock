@@ -1898,6 +1898,14 @@
   resolved "https://registry.yarnpkg.com/@react-navigation/elements/-/elements-1.3.21.tgz#debac6becc6b6692da09ec30e705e476a780dfe1"
   integrity sha512-eyS2C6McNR8ihUoYfc166O1D8VYVh9KIl0UQPI8/ZJVsStlfSTgeEEh+WXge6+7SFPnZ4ewzEJdSAHH+jzcEfg==
 
+"@react-navigation/material-top-tabs@^6.6.13":
+  version "6.6.13"
+  resolved "https://registry.yarnpkg.com/@react-navigation/material-top-tabs/-/material-top-tabs-6.6.13.tgz#d32a787d61ae7115797672cbaf477df149b7deba"
+  integrity sha512-utwS0SLl/dq6+PHWGOz4rNNkYzveqvbffXJ6TIrUdaWDDysjBa4btHUOVvXfNADIK4LafmbuRi0xA/zd6HoCPQ==
+  dependencies:
+    color "^4.2.3"
+    warn-once "^0.1.0"
+
 "@react-navigation/native-stack@^6.9.13":
   version "6.9.13"
   resolved "https://registry.npmjs.org/@react-navigation/native-stack/-/native-stack-6.9.13.tgz"
@@ -6005,6 +6013,32 @@ mkdirp@^0.5.1:
   dependencies:
     minimist "^1.2.6"
 
+mobx-flipper@^1.2.6:
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/mobx-flipper/-/mobx-flipper-1.2.6.tgz#9802cee0f258a5668f1190f40a3179fbca12dda1"
+  integrity sha512-k4yR1pU/o4j6AAOofrHeIeMvCg44pNdZcuieiSlBmCElHEqCMPMJFlxOT38wjoJSOJe+LOSv2OKIOFqqufuqXw==
+  dependencies:
+    mobx "^6.3.0"
+    mobx-state-tree "^5.0.1"
+    react-native-flipper "^0.87.0"
+
+mobx-react-lite@^4.0.7:
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/mobx-react-lite/-/mobx-react-lite-4.0.7.tgz#f4e21e18d05c811010dcb1d3007e797924c4d90b"
+  integrity sha512-RjwdseshK9Mg8On5tyJZHtGD+J78ZnCnRaxeQDSiciKVQDUbfZcXhmld0VMxAwvcTnPEHZySGGewm467Fcpreg==
+  dependencies:
+    use-sync-external-store "^1.2.0"
+
+mobx-state-tree@^5.0.1:
+  version "5.4.2"
+  resolved "https://registry.yarnpkg.com/mobx-state-tree/-/mobx-state-tree-5.4.2.tgz#351bb49c9d08d2482688357cccc59ce51d773615"
+  integrity sha512-SGXAh2KCBQbWVcxeQbZEr5pchTgcfNZmGVRL2a2Me+pSMH98bZWXD6EOuuijbTGbc0hOoOsbab3JdwJyr+fW7Q==
+
+mobx@^6.12.3, mobx@^6.3.0:
+  version "6.12.3"
+  resolved "https://registry.yarnpkg.com/mobx/-/mobx-6.12.3.tgz#b6a0fde4268116be602d50bffb32f1b90a8fb077"
+  integrity sha512-c8NKkO4R2lShkSXZ2Ongj1ycjugjzFFo/UswHBnS62y07DMcTc9Rvo03/3nRyszIvwPNljlkd4S828zIBv/piw==
+
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/ms/-/ms-2.0.0.tgz"
@@ -6671,6 +6705,16 @@ react-native-fast-image@^8.6.3:
   resolved "https://registry.npmjs.org/react-native-fast-image/-/react-native-fast-image-8.6.3.tgz"
   integrity sha512-Sdw4ESidXCXOmQ9EcYguNY2swyoWmx53kym2zRsvi+VeFCHEdkO+WG1DK+6W81juot40bbfLNhkc63QnWtesNg==
 
+react-native-flipper@^0.212.0:
+  version "0.212.0"
+  resolved "https://registry.yarnpkg.com/react-native-flipper/-/react-native-flipper-0.212.0.tgz#b3fdd47676ecd09a25edd77a1466acace6276762"
+  integrity sha512-bDRfIgE3v/jjEEdnvGP0T6maDD+bXhDAQ/SZUYTKd/CQ6YIU1c0EF+e0urU62LNMv6XEFQKz226McdddyVhYZA==
+
+react-native-flipper@^0.87.0:
+  version "0.87.0"
+  resolved "https://registry.yarnpkg.com/react-native-flipper/-/react-native-flipper-0.87.0.tgz#7442994a5dd3fadd64b78293835af36bcf7fa891"
+  integrity sha512-WCi0j/4gRxYbEizVHN9kNWKx7m/sBajxXXhhTQBmhNLywSData+za62e5XtTGTnHoS8bDC5ev65PKAA7ncM9Lg==
+
 react-native-gesture-handler@^2.13.4:
   version "2.13.4"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-2.13.4.tgz#6a99384330278c4488bcfc7f1814be3e0d7401fd"
@@ -6686,6 +6730,11 @@ react-native-linear-gradient@^2.8.3:
   version "2.8.3"
   resolved "https://registry.npmjs.org/react-native-linear-gradient/-/react-native-linear-gradient-2.8.3.tgz"
   integrity sha512-KflAXZcEg54PXkLyflaSZQ3PJp4uC4whM7nT/Uot9m0e/qxFV3p6uor1983D1YOBJbJN7rrWdqIjq0T42jOJyA==
+
+react-native-pager-view@^6.3.1:
+  version "6.3.1"
+  resolved "https://registry.yarnpkg.com/react-native-pager-view/-/react-native-pager-view-6.3.1.tgz#16ef202248311262e3fffd0191d7043a88e8d5fc"
+  integrity sha512-U7Ep6ukTA5pKMQskSxHpDI9RoESzBHDcBfVFwnK5SRCy9632Dq4a7Jp2m8vA9mK5k6Vi7yaqqKLFVoHnUdC8zA==
 
 react-native-reanimated@^3.5.4:
   version "3.5.4"
@@ -6717,6 +6766,13 @@ react-native-svg@^13.14.0:
   dependencies:
     css-select "^5.1.0"
     css-tree "^1.1.3"
+
+react-native-tab-view@^3.5.2:
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-3.5.2.tgz#2789b8af6148b16835869566bf13dc3b0e6c1b46"
+  integrity sha512-nE5WqjbeEPsWQx4mtz81QGVvgHRhujTNIIZiMCx3Bj6CBFDafbk7XZp9ocmtzXUQaZ4bhtVS43R4FIiR4LboJw==
+  dependencies:
+    use-latest-callback "^0.1.5"
 
 react-native@0.72.4:
   version "0.72.4"
