@@ -1,5 +1,5 @@
 import {useInfiniteQuery} from '@tanstack/react-query';
-import API from './api';
+import {axiosService} from './api';
 
 const HOME_PATHNAME = {
   GET_IMAGES_URL: 'photos/',
@@ -16,7 +16,6 @@ type TGetImagesParams = {
   [Key in TImagesParams]: string | number;
 } & InfiniteQueryParams;
 
-const api = new API();
 const getImages = async (
   props: TGetImagesParams = {
     page: 1,
@@ -26,7 +25,7 @@ const getImages = async (
   },
 ) => {
   props.page = props.pageParam;
-  const results = await api.get(HOME_PATHNAME.GET_IMAGES_URL, props);
+  const results = await axiosService.get(HOME_PATHNAME.GET_IMAGES_URL, props);
   // console.log(
   //   '---call api---',
   //   results?.map(item => item.id),

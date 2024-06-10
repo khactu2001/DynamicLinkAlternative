@@ -10,6 +10,9 @@ export type RootStackParamList = {
   };
   TodoScreen: undefined;
   MainTabs: undefined;
+  ListPhotos: {
+    collectionId: string;
+  };
 };
 
 export type ScreensProps<T extends keyof RootStackParamList> =

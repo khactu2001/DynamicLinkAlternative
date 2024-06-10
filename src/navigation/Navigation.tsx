@@ -15,6 +15,7 @@ import CustomBottomBar from '~sharedComponents/bottom-bar/CustomBottomBar';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import Collection from '~modules/feed/sub_pages/collection/Collection';
 import User from '~modules/feed/sub_pages/User';
+import ListPhotos from '~modules/feed/sub_pages/collection/ListPhotos';
 
 const TopTab = createMaterialTopTabNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -87,6 +88,8 @@ export default function NavigationTree() {
 
         <NativeStack.Screen name="AboutScreen" component={AboutScreen} />
         <NativeStack.Screen name="NoticeScreen" component={NoticeScreen} />
+
+        <NativeStack.Screen name="ListPhotos" component={ListPhotos} />
       </NativeStack.Navigator>
       {/* <Drawer.Navigator
         screenOptions={{
@@ -113,6 +116,17 @@ function MainTabs() {
     </BottomTab.Navigator>
   );
 }
+
+// function Stack() {
+//   return (
+//     <NativeStack.Navigator
+//       screenOptions={{
+//         headerShown: false,
+//       }}>
+//       <NativeStack.Screen name="FeedScreen" component={FeedScreen} />
+//     </NativeStack.Navigator>
+//   );
+// }
 
 function FeedTopTabs() {
   return (

@@ -1,21 +1,13 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios, {AxiosHeaders, AxiosRequestConfig, AxiosResponse} from 'axios';
+import axios, {AxiosRequestConfig} from 'axios';
 import {Alert} from 'react-native';
-import {ListImages} from '~models/image-model';
 import Config from 'react-native-config';
-import BaseModel from '~models/base_api_model';
-
-// const BASE_URL = process.env.API_IMAGES;
-// const CLIENT_ID = process.env.CLIENT_ID;
-// const ACCESS_KEY = process.env.ACCESS_KEY;
 
 const {BASE_URL, ACCESS_KEY} = Config;
-// const ACCESS_KEY = '4tNBFTHNRJGTfp5GomITIsfgoMktNh0Lu8wRAyBnyWA';
 
 type TParams = AxiosRequestConfig & {
   [key: string]: string | number | boolean;
 };
-export default class AxiosService {
+class AxiosService {
   private requestConfig = async (props: AxiosRequestConfig) => {
     try {
       props.headers = {};
@@ -27,8 +19,8 @@ export default class AxiosService {
       return data;
     } catch (error) {
       // handle error here
-      Alert.alert(error.message);
-      if (error.response) {
+      Alert.alert(error?.message ?? 'Something went wrong');
+      if (error?.response) {
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx
         console.log(error.response.data);
@@ -55,3 +47,6 @@ export default class AxiosService {
     });
   };
 }
+
+// create an instance
+export const axiosService = new AxiosService();

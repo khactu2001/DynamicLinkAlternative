@@ -4,8 +4,7 @@ const HOME_PATHNAME = {
   GET_RANDOM_IMAGES_URL: 'photos/random',
 };
 
-import API from './api';
-const api = new API();
+import {axiosService} from './api';
 
 type TImagesParams = 'page' | 'per_page' | 'order_by';
 type TGetImagesParams = {
@@ -20,19 +19,19 @@ export default class HomeService {
       order_by: 'latest',
     },
   ) => {
-    const results = await api.get(HOME_PATHNAME.GET_IMAGES_URL, props);
+    const results = await axiosService.get(HOME_PATHNAME.GET_IMAGES_URL, props);
 
     return results;
   };
 
   searchImages = async () => {
-    const results = await api.get(HOME_PATHNAME.SEARCH_IMAGES_URL);
+    const results = await axiosService.get(HOME_PATHNAME.SEARCH_IMAGES_URL);
 
     return results;
   };
 
   getRandomImages = async () => {
-    const results = await api.get(HOME_PATHNAME.GET_RANDOM_IMAGES_URL);
+    const results = await axiosService.get(HOME_PATHNAME.GET_RANDOM_IMAGES_URL);
 
     return results;
   };

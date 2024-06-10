@@ -3,10 +3,10 @@ import {
   UseInfiniteQueryOptions,
   useInfiniteQuery,
 } from '@tanstack/react-query';
-import API from '../../api/api';
 import {TImage} from '~models/image-model';
 import {BaseQueryParams, InfiniteQueryParams} from '~models/common-model';
 import {getCollections} from '~api/collection-api';
+import {axiosService} from '~api/api';
 
 const HOME_PATHNAME = {
   GET_IMAGES_URL: 'photos/',
@@ -34,7 +34,6 @@ type TSearchImagesParams = {
   [Key in TImagesParams]?: string | number;
 };
 
-const api = new API();
 const getPhotos = async (
   props: TGetImagesParams = {
     page: 1,
@@ -43,14 +42,14 @@ const getPhotos = async (
     pageParam: 1,
   },
 ) => {
-  const results = await api.get(HOME_PATHNAME.GET_IMAGES_URL, props);
+  const results = await axiosService.get(HOME_PATHNAME.GET_IMAGES_URL, props);
   return {
     result: results ?? [],
     nextPageParam: (props.page as number) + 1,
   };
 };
 const searchPhotos = async (props: TSearchImagesParams) => {
-  const response: SearchPhotoResponse = await api.get(
+  const response: SearchPhotoResponse = await axiosService.get(
     HOME_PATHNAME.SEARCH_PHOTOS,
     props,
   );
@@ -92,7 +91,7 @@ export const useSearchPhotos = (props: TSearchImagesParams) => {
       const currentItemsLength = allPages.reduce(
         (downloadedLength: number, current: SearchPhotoResponse) => {
           currentPage += 1;
-          return downloadedLength + current.results.length;
+          return downloadedLength + current?.results?.length ?? 0;
         },
         0,
       );
@@ -112,10 +111,34 @@ export const useInfiniteQueryCollection = (props: BaseQueryParams) => {
     queryFn: ({pageParam = 1}) =>
       getCollections({
         ...props,
-        pageParam: pageParam,
+        page: pageParam,
       }),
     getNextPageParam: lastPage => {
       return lastPage.nextPageParam;
     },
   });
+};
+
+type TInfiniteQueryParams = {
+  queryKey: string[];
+  queryFn: () => Promise<any>;
+  getNextPageParam?: (lastPage: any, allPages: any) => any;
+  enabled?: boolean;
+};
+
+export const useFetchInfinite = (params: TInfiniteQueryParams) => {
+  // return useInfiniteQuery({
+  //   queryKey: ['sdfsdf'],
+  //   queryFn: () => params.queryFn(),
+  //   getNextPageParam: params.getNextPageParam,
+  //   select: data => data.pages.length,
+  // });
+  // const {data, ...rest} = useInfiniteQuery(params.queryKey, params.queryFn, {
+  //   select: data => {
+  //     return {
+  //       ...data,
+  //       pages: data.pages.map(page => {
+  //       }
+  //   },
+  // });
 };

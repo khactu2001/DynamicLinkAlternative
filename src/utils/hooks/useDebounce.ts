@@ -1,4 +1,3 @@
-import React from 'react';
 let timerId: NodeJS.Timeout;
 
 const useDebounce = (func: Function, delay: number) => {
@@ -9,5 +8,3 @@ const useDebounce = (func: Function, delay: number) => {
 };
 
 export default useDebounce;
-
-// const textDebounce = useDebounce(setText, 500);

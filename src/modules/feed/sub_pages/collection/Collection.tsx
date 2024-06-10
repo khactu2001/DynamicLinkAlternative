@@ -49,7 +49,7 @@ const CollectionScreen = () => {
   // const flattenImages = useMemo(() => {
   //   return data?.pages.flatMap(page => page.result);
   // }, [data]);
-  console.log('==flattenImages==', data?.pages);
+  // console.log('==flattenImages==', data?.pages);
   const flattenImages =
     data?.pages?.flatMap((page, index) =>
       page.result.map(image => ({
@@ -63,7 +63,6 @@ const CollectionScreen = () => {
   };
 
   const updateImage = (id: string, page_index: number = 0) => {
-    console.log('==id==', id, page_index);
     const existingData = queryClient.getQueryData([GET_PHOTOS_KEY]);
 
     const list: TImage[] = existingData?.pages[page_index]?.result ?? [];
@@ -83,7 +82,12 @@ const CollectionScreen = () => {
     queryClient.setQueryData([GET_PHOTOS_KEY], existingData);
   };
 
-  const renderImage = ({item, index}: RenderItemType<Collection>) => {
+  const onPressCollection = (id: number) => {};
+
+  const renderImage = ({
+    item,
+    index,
+  }: RenderItemType<Collection & {seen?: boolean}>) => {
     if (!item) return null;
     const {urls} = item?.cover_photo ?? {};
     return (
@@ -95,6 +99,7 @@ const CollectionScreen = () => {
           //     visible: true,
           //     index,
           //   });
+          onPressCollection(item.id);
         }}>
         <ListItemCollection
           imageProps={{
