@@ -13,6 +13,9 @@ export type RootStackParamList = {
   ListPhotos: {
     collectionId: string;
   };
+  SearchScreen: {
+    searchType: string;
+  };
 };
 
 export type ScreensProps<T extends keyof RootStackParamList> =

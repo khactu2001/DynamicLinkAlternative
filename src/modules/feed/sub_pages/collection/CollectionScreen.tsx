@@ -1,3 +1,4 @@
+import {useQueryClient} from '@tanstack/react-query';
 import React, {useState} from 'react';
 import {
   ActivityIndicator,
@@ -8,24 +9,22 @@ import {
   Pressable,
   StyleSheet,
   Text,
+  TextInput,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {useFetchImages} from '~api/feed-api';
-import {RenderItemType} from '~models/common-model';
-import {TImage} from '~models/image-model';
-import {ScreensProps} from '~navigation/types';
-import ListItemImage from '../../components/ListItemImage';
-import {
-  GET_PHOTOS_KEY,
-  useGetPhotos,
-  useInfiniteQueryCollection,
-} from '~utils/hooks/useCustomHook';
-import {useQueryClient} from '@tanstack/react-query';
 import {icons} from '~assets/icons';
 import {Collection} from '~models/collection_model';
+import {RenderItemType} from '~models/common-model';
+import {TImage} from '~models/image-model';
+import {
+  GET_PHOTOS_KEY,
+  useInfiniteQueryCollection,
+} from '~utils/hooks/useCustomHook';
 import ListItemCollection from './ListItemCollection';
+import {RootStackParamList, ScreensProps} from '~navigation/types';
 
 const SCREEN_DIMENSION = Dimensions.get('screen');
 const SCREEN_RATIO = SCREEN_DIMENSION.width / SCREEN_DIMENSION.height;
@@ -33,7 +32,12 @@ const NUM_COLUMNS = 2;
 const MARGIN = 8;
 const WIDTH_IMAGE =
   (SCREEN_DIMENSION.width - (NUM_COLUMNS + 1) * MARGIN) / NUM_COLUMNS;
-const CollectionScreen = () => {
+
+// type ScreenName= keyof RootStackParamList;
+// type ScreenProps =
+
+const CollectionScreen = (props: ScreensProps<'SearchScreen'>) => {
+  const {navigation, route} = props;
   const [modalOptions, setModalOptions] = useState({
     visible: false,
     index: 0,
@@ -145,6 +149,13 @@ const CollectionScreen = () => {
           };
     return <FastImage source={{uri}} style={[customStyle]} />;
   };
+
+  const onPressSearch = () => {
+    console.log('===rpress in===');
+    navigation.navigate('SearchScreen', {
+      searchType: 'collection',
+    });
+  };
   return (
     <View style={styles.root}>
       <FlatList
@@ -162,6 +173,22 @@ const CollectionScreen = () => {
         ListFooterComponent={
           hasNextPage ? <ActivityIndicator size={'small'} /> : null
         }
+        ListHeaderComponent={() => (
+          <TouchableOpacity
+            style={{paddingHorizontal: 8}}
+            onPress={onPressSearch}>
+            <TextInput
+              style={{
+                borderRadius: 8,
+                height: 50,
+                backgroundColor: '#E0E0E0',
+                paddingHorizontal: 8,
+              }}
+              editable={false}
+              placeholder="Search collection..."
+            />
+          </TouchableOpacity>
+        )}
       />
 
       <Modal visible={modalOptions.visible} animationType="fade" transparent>

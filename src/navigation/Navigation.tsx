@@ -13,9 +13,11 @@ import TodoScreen from '~modules/todo/Todo';
 import {RootStackParamList} from '~navigation/types';
 import CustomBottomBar from '~sharedComponents/bottom-bar/CustomBottomBar';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import Collection from '~modules/feed/sub_pages/collection/Collection';
-import User from '~modules/feed/sub_pages/User';
+import CollectionPage from '~modules/feed/sub_pages/collection/CollectionScreen';
 import ListPhotos from '~modules/feed/sub_pages/collection/ListPhotos';
+import ImageScreen from '~modules/feed/sub_pages/ImageScreen';
+import CollectionScreen from '~modules/feed/sub_pages/collection/CollectionScreen';
+import SearchScreen from '~modules/feed/sub_pages/SearchScreen';
 
 const TopTab = createMaterialTopTabNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -90,6 +92,7 @@ export default function NavigationTree() {
         <NativeStack.Screen name="NoticeScreen" component={NoticeScreen} />
 
         <NativeStack.Screen name="ListPhotos" component={ListPhotos} />
+        <NativeStack.Screen name="SearchScreen" component={SearchScreen} />
       </NativeStack.Navigator>
       {/* <Drawer.Navigator
         screenOptions={{
@@ -131,8 +134,8 @@ function MainTabs() {
 function FeedTopTabs() {
   return (
     <TopTab.Navigator>
-      <TopTab.Screen name="Collection" component={Collection} />
-      <TopTab.Screen name="User" component={User} />
+      <TopTab.Screen name="Collection" component={CollectionScreen} />
+      <TopTab.Screen name="Image" component={ImageScreen} />
     </TopTab.Navigator>
   );
 }

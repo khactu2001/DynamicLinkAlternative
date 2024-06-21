@@ -1,6 +1,7 @@
-import React, {memo, useState} from 'react';
+import React, {memo, useCallback, useState} from 'react';
 import {Text, TextInput, View} from 'react-native';
 import uuid from 'react-native-uuid';
+import useDebounce from '~utils/hooks/useDebounce';
 
 type Props = {};
 
@@ -10,7 +11,7 @@ export interface TProduct {
   price: number;
 }
 
-const User = (props: Props) => {
+const ImageScreen = (props: Props) => {
   const [products, setProducts] = useState<TProduct[]>([
     {
       id: uuid.v4(),
@@ -47,6 +48,9 @@ const User = (props: Props) => {
     0,
   );
 
+  const [value, setValue] = useState<string>();
+  const useSearchDebounce = useCallback(useDebounce(setValue, 300), []);
+  console.log('state value', value);
   return (
     <View>
       <Text>User</Text>
@@ -64,6 +68,7 @@ const User = (props: Props) => {
 
       <View style={{alignItems: 'center'}}>
         <Text style={{fontSize: 20, color: 'black'}}>{totalPrice}</Text>
+        <TextInput value={value} onChangeText={useSearchDebounce} />
       </View>
     </View>
   );
@@ -99,21 +104,21 @@ const ItemList = memo(
     );
   },
 );
-function areEqual(prevProps, nextProps) {
-  /*
-  return true if passing nextProps to render would return
-  the same result as passing prevProps to render,
-  otherwise return false
-  */
-  const prevItem = prevProps.product;
-  const nextItem = nextProps.product;
-  // true: if they are equal
-  // false: they change
-  return (
-    prevItem.id !== nextItem.id ||
-    prevItem.price !== nextItem.price ||
-    prevItem.name !== nextItem.name
-  );
-}
+// function areEqual(prevProps, nextProps) {
+//   /*
+//   return true if passing nextProps to render would return
+//   the same result as passing prevProps to render,
+//   otherwise return false
+//   */
+//   const prevItem = prevProps.product;
+//   const nextItem = nextProps.product;
+//   // true: if they are equal
+//   // false: they change
+//   return (
+//     prevItem.id !== nextItem.id ||
+//     prevItem.price !== nextItem.price ||
+//     prevItem.name !== nextItem.name
+//   );
+// }
 
-export default User;
+export default ImageScreen;

@@ -1,3 +1,4 @@
+import {useQueryClient} from '@tanstack/react-query';
 import React, {useState} from 'react';
 import {
   ActivityIndicator,
@@ -12,14 +13,11 @@ import {
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {useFetchImages} from '~api/feed-api';
+import {icons} from '~assets/icons';
 import {RenderItemType} from '~models/common-model';
 import {TImage} from '~models/image-model';
-import {ScreensProps} from '~navigation/types';
-import ListItemImage from './components/ListItemImage';
 import {GET_PHOTOS_KEY, useGetPhotos} from '~utils/hooks/useCustomHook';
-import {useQueryClient} from '@tanstack/react-query';
-import {icons} from '~assets/icons';
+import ListItemImage from './components/ListItemImage';
 
 const SCREEN_DIMENSION = Dimensions.get('screen');
 const SCREEN_RATIO = SCREEN_DIMENSION.width / SCREEN_DIMENSION.height;

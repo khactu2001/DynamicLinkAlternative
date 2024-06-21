@@ -4,8 +4,12 @@ import {
   useInfiniteQuery,
 } from '@tanstack/react-query';
 import {TImage} from '~models/image-model';
-import {BaseQueryParams, InfiniteQueryParams} from '~models/common-model';
-import {getCollections} from '~api/collection-api';
+import {
+  BaseQueryParams,
+  InfiniteQueryParams,
+  QueryParams,
+} from '~models/common-model';
+import {getCollections, searchCollections} from '~api/collection-api';
 import {axiosService} from '~api/api';
 
 const HOME_PATHNAME = {
@@ -18,6 +22,7 @@ const HOME_PATHNAME = {
 export const GET_PHOTOS_KEY = 'get-photos';
 export const SEARCH_PHOTOS_KEY = 'search-photos';
 export const GET_COLLECTIONS_KEY = 'get-collections';
+export const SEARCH_COLLECTIONS_KEY = 'search-collections';
 
 type TImagesParams = 'page' | 'per_page' | 'order_by' | 'query';
 
@@ -141,4 +146,22 @@ export const useFetchInfinite = (params: TInfiniteQueryParams) => {
   //       }
   //   },
   // });
+};
+
+export const useSearchCollections = (
+  queryKey: string[],
+  props: BaseQueryParams & QueryParams,
+) => {
+  return useInfiniteQuery({
+    queryKey: queryKey,
+    queryFn: ({pageParam = 1}) =>
+      searchCollections({
+        page: pageParam,
+        per_page: props?.per_page ?? 10,
+        query: props?.query,
+      }),
+    getNextPageParam: lastPage => {
+      return lastPage.nextPageParam;
+    },
+  });
 };

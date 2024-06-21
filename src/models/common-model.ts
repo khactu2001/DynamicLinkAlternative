@@ -12,6 +12,10 @@ export type InfiniteQueryParams = {
 };
 
 export type BaseQueryParams = {
-  page: number;
-  per_page: number;
+  page?: number;
+  per_page?: number;
+};
+
+export type QueryParams = {
+  query?: string;
 };
