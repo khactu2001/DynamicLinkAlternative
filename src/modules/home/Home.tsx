@@ -5,6 +5,7 @@ import {useTranslation} from 'react-i18next';
 import {ScreensProps} from '~navigation/types';
 import counterStore from '~modules/feed/store';
 import {observer} from 'mobx-react-lite';
+import TextInputComponent from '~core/textinput/TextInputComponent';
 
 const HomeScreen = observer(
   ({navigation, route}: ScreensProps<'HomeScreen'>) => {

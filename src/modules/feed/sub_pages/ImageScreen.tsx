@@ -1,6 +1,8 @@
 import React, {memo, useCallback, useState} from 'react';
 import {Text, TextInput, View} from 'react-native';
 import uuid from 'react-native-uuid';
+import Screen from '~core/screen/Screen';
+import TextInputComponent from '~core/textinput/TextInputComponent';
 import useDebounce from '~utils/hooks/useDebounce';
 
 type Props = {};
@@ -52,7 +54,7 @@ const ImageScreen = (props: Props) => {
   const useSearchDebounce = useCallback(useDebounce(setValue, 300), []);
   console.log('state value', value);
   return (
-    <View>
+    <Screen>
       <Text>User</Text>
       <View>
         {products?.map(value => (
@@ -70,7 +72,9 @@ const ImageScreen = (props: Props) => {
         <Text style={{fontSize: 20, color: 'black'}}>{totalPrice}</Text>
         <TextInput value={value} onChangeText={useSearchDebounce} />
       </View>
-    </View>
+
+      <TextInputComponent />
+    </Screen>
   );
 };
 

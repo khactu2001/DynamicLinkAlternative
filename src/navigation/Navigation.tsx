@@ -3,7 +3,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import * as React from 'react';
-import {Text} from 'react-native';
+import {Text, useColorScheme, App} from 'react-native';
 import AboutScreen from '~modules/about/About';
 import FeedScreen from '~modules/feed/Feed';
 import HomeScreen from '~modules/home/Home';
@@ -18,6 +18,24 @@ import ListPhotos from '~modules/feed/sub_pages/collection/ListPhotos';
 import ImageScreen from '~modules/feed/sub_pages/ImageScreen';
 import CollectionScreen from '~modules/feed/sub_pages/collection/CollectionScreen';
 import SearchScreen from '~modules/feed/sub_pages/SearchScreen';
+import {DefaultTheme, DarkTheme} from '@react-navigation/native';
+import {colors} from '~constants/colors';
+
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: 'rgb(255, 45, 85)',
+    text: colors.black,
+  },
+};
+const MyDarkTheme = {
+  ...DarkTheme,
+  colors: {
+    ...DarkTheme.colors,
+    primary: 'rgb(10, 132, 255)',
+  },
+};
 
 const TopTab = createMaterialTopTabNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -40,6 +58,8 @@ export default function NavigationTree() {
     config,
   };
 
+  const colorScheme = useColorScheme();
+
   // Linking.getInitialURL().then(url => {
   //   console.log('url', url);
   // });
@@ -48,7 +68,7 @@ export default function NavigationTree() {
     <NavigationContainer
       linking={linking}
       fallback={<Text>Loading...</Text>}
-
+      theme={colorScheme === 'dark' ? MyDarkTheme : MyTheme}
       // onStateChange={state => console.log('New state is', state?.routes)}
     >
       {/* <NativeStack.Navigator
@@ -109,6 +129,7 @@ function MainTabs() {
     <BottomTab.Navigator
       screenOptions={{
         headerShown: false,
+        // tabBarHideOnKeyboard: true,
       }}
       tabBar={props => <CustomBottomBar {...props} />}>
       <BottomTab.Screen name="HomeScreen" component={HomeScreen} />

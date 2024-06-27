@@ -1,5 +1,5 @@
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
-import {useEffect, useRef} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Animated,
   Dimensions,
+  Keyboard,
 } from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Svg, {Path} from 'react-native-svg';
@@ -27,6 +28,29 @@ const COLOR_BOTTOM_BAR = '#FFF';
 const COLOR_FLOAT_BUTTON = '#76FF03';
 function CustomBottomBar({state, descriptors, navigation}: BottomTabBarProps) {
   const insets = useSafeAreaInsets();
+  const {options} = descriptors;
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => {
+        setKeyboardVisible(true); // Keyboard is visible
+      },
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        setKeyboardVisible(false); // Keyboard is hidden
+      },
+    );
+
+    return () => {
+      keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+    };
+  }, []);
+  if (isKeyboardVisible) return null;
   return (
     <View
       style={[
